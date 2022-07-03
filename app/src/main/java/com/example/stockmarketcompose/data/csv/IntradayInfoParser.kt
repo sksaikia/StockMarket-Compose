@@ -34,7 +34,8 @@ class IntradayInfoParser @Inject constructor() : CSVParser<IntradayInfo> {
                     dto.toIntradayInfo()
                 }
                 .filter {
-                    it.date.dayOfMonth == LocalDateTime.now().minusDays(1).dayOfMonth
+                    //minusDays does not work with 1 if you try on Sunday
+                    it.date.dayOfMonth == LocalDateTime.now().minusDays(3).dayOfMonth
                 }
                 .sortedBy {
                     it.date.hour
